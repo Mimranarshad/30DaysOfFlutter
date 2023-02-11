@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'Pages/home_page.dart';
-import 'Pages/login_page.dart';
-import 'Utils/routes.dart';
+import 'screens/home_page.dart';
+import 'screens/login_page.dart';
+import 'utils/routes.dart';
 import 'widgets/themes.dart';
 
 void main() {

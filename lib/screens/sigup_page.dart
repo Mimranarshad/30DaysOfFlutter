@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_catalog_project/Pages/login_page.dart';
-import '../Utils/routes.dart';
+import 'package:flutter_catalog_project/screens/login_page.dart';
+import '../utils/routes.dart';
 
 class SignUpPage extends StatefulWidget {
   @override

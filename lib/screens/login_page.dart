@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'sigup_page.dart';
-import '../Utils/routes.dart';
+import '../utils/routes.dart';
 
 class LoginPage extends StatefulWidget {
   @override
