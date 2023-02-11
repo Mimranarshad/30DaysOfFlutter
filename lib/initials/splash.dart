@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_catalog_project/Pages/login_page.dart';
-import '../veriables/Theme.dart';
+import '../veriables/veriables.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
