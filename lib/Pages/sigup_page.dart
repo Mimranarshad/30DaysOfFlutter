@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'sigup_page.dart';
+import 'package:flutter_catalog_project/Pages/login_page.dart';
 import '../Utils/routes.dart';
 
-class LoginPage extends StatefulWidget {
+class SignUpPage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpPageState extends State<SignUpPage> {
   String name = '';
   bool changeButton = false;
   final _formKey = GlobalKey<FormState>();
@@ -41,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               SizedBox(height: 20),
               Text(
-                'Welcome $name',
+                'Register Yourself',
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
               ),
               Padding(
@@ -67,6 +67,26 @@ class _LoginPageState extends State<LoginPage> {
                       },
                     ),
                     TextFormField(
+                      // controller: phoneNumberController,
+                      keyboardType: TextInputType.phone,
+                      // inputFormatters: [
+                      //   WhitelistingTextInputFormatter.digitsOnly,
+                      // ],
+                      decoration: InputDecoration(
+                        labelText: 'Phone Number',
+                        hintText: 'Enter your phone number',
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter your phone number';
+                        }
+                        if (value.length != 10) {
+                          return 'Please enter a valid 10 digit phone number';
+                        }
+                        return null;
+                      },
+                    ),
+                    TextFormField(
                       obscureText: true,
                       decoration: InputDecoration(
                         hintText: 'Enter Password',
@@ -83,26 +103,23 @@ class _LoginPageState extends State<LoginPage> {
                       },
                     ),
                     SizedBox(height: 15),
-
                     InkWell(
                       onTap: () => {
-                        Navigator.push(
-                            context,
+                        Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
-                                builder: (context) => SignUpPage()))
+                                builder: (context) => LoginPage()),
+                            (Route<dynamic> route) => false)
                       },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 5),
                         child: Container(
                           alignment: Alignment.centerRight,
                           decoration: BoxDecoration(),
-                          child: Text('I have no account'),
+                          child: Text('I have already account'),
                         ),
                       ),
                     ),
-
                     SizedBox(height: 40),
-
                     Material(
                       color: Colors.deepPurple,
                       borderRadius:
@@ -117,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: changeButton
                               ? Icon(Icons.done, color: Colors.white)
                               : Text(
-                                  'Login',
+                                  'Register',
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 17,
@@ -126,13 +143,6 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     )
-                    // ElevatedButton(
-                    //   child: Text('Login'),
-                    //   onPressed: () {
-                    //     Navigator.pushNamed(context, MyRoutes.homeRoute);
-                    //   },
-                    //   style: TextButton.styleFrom(minimumSize: Size(150, 40)),
-                    // )
                   ],
                 ),
               ),
