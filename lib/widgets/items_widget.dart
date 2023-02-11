@@ -1,11 +1,33 @@
-import 'package:flutter/material.dart';
-import '../models/catalog.dart';
-import '../veriables/veriables.dart';
+import 'dart:convert';
 
-class ItemWidget extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import '../models/catalog.dart';
+import 'package:flutter/services.dart';
+
+class ItemWidget extends StatefulWidget {
   final Item item;
 
   const ItemWidget({super.key, required this.item});
+
+  @override
+  State<ItemWidget> createState() => _ItemWidgetState();
+}
+
+class _ItemWidgetState extends State<ItemWidget> {
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  loadData() async {
+    final CatalogJson =
+        await rootBundle.loadString("assets/files/catalog.json");
+    final decodedData = jsonDecode(CatalogJson);
+    var productData = decodedData["products"];
+    print(productData);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,15 +40,14 @@ class ItemWidget extends StatelessWidget {
           decoration: BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
-                  fit: BoxFit.cover, image: NetworkImage(item.image))),
+                  fit: BoxFit.cover, image: NetworkImage(widget.item.image))),
         ),
         title: Text(
-          item.name,
+          widget.item.name,
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
         ),
-        subtitle: Text(item.desc, style: TextStyle(fontSize: 14)),
-        trailing: Text("\$${item.price.toStringAsFixed(2)}",
-            style: TextStyle(fontWeight: FontWeight.bold),
+        subtitle: Text(widget.item.desc, style: TextStyle(fontSize: 14)),
+        trailing: Text("\$${widget.item.price.toStringAsFixed(2)}",
             textScaleFactor: 1.2),
       ),
     );
