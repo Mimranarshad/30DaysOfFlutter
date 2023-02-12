@@ -1,9 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import '../models/catalog.dart';
-import 'package:flutter/services.dart';
 
 class ItemWidget extends StatefulWidget {
   final Item item;
@@ -15,20 +11,6 @@ class ItemWidget extends StatefulWidget {
 }
 
 class _ItemWidgetState extends State<ItemWidget> {
-  @override
-  void initState() {
-    super.initState();
-    loadData();
-  }
-
-  loadData() async {
-    final CatalogJson =
-        await rootBundle.loadString("assets/files/catalog.json");
-    final decodedData = jsonDecode(CatalogJson);
-    var productData = decodedData["products"];
-    print(productData);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -42,13 +24,9 @@ class _ItemWidgetState extends State<ItemWidget> {
               image: DecorationImage(
                   fit: BoxFit.cover, image: NetworkImage(widget.item.image))),
         ),
-        title: Text(
-          widget.item.name,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-        ),
+        title: Text(widget.item.name),
         subtitle: Text(widget.item.desc, style: TextStyle(fontSize: 14)),
-        trailing: Text("\$${widget.item.price.toStringAsFixed(2)}",
-            textScaleFactor: 1.2),
+        trailing: Text("\$${widget.item.price.toStringAsFixed(2)}"),
       ),
     );
   }
